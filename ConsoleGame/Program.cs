@@ -7,7 +7,7 @@ namespace ConsoleGame {
         static void Main(string[] args) {
 
             // Begin Home screen Code
-            InlineConsole.DisplayHome();
+            GameController.DisplayHome();
 
             /*
              * Begin Loop Booleans
@@ -24,9 +24,8 @@ namespace ConsoleGame {
                 Console.WriteLine("Welcome To Time Haunting! Choose Option: ");
                 Console.WriteLine(@"[S]tart Game       [C]reate Player       [P]layer List       [V]iew Credits       [E]xit");
                 var t = InlineConsole.ReadPrompt("> ");
-                var tChar = " ";
                 if (t == InlineConsole.ee) {
-                    InlineConsole.EasterEgg();
+                    GameController.EasterEgg();
                 }
                 // End Home Screen Code
 
@@ -48,14 +47,22 @@ namespace ConsoleGame {
                     case "e":
                         exit = true;
                         break;
+                    case "v":
+                        Console.WriteLine("Made by Titus Moore");
+                        break;
                     default:
+                        exit = true;
                         break;
                 }
 
             } while (menu == true && exit == false);
+
+
             while (run) {
-                Console.WriteLine("This is where you play the game");
                 Console.WriteLine($"Welcome {instancePlayer.Name}");
+
+                GameController.Controls();
+
                 run = false;
             }
         }

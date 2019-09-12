@@ -11,7 +11,7 @@ namespace ConsoleGame.Models.Player {
         private decimal Armor { get; set; } = 0;
         public decimal Cash { get; set; }
         public bool isDead { get; set; } = false;
-        private Item[] Inventory { get; set; }
+        private List<Item> Inventory { get; set; }
         private int InvSpace { get; set; } = 100;
 
         /* 
@@ -40,7 +40,7 @@ namespace ConsoleGame.Models.Player {
             if (this.Level != 0) {
                 this.Level = 0;
             }
-            InlineConsole.DisplayDead();
+            GameController.DisplayDead();
         }
 
         /*
@@ -72,10 +72,26 @@ namespace ConsoleGame.Models.Player {
             this.InvSpace = this.InvSpace + a;
         }
 
+        // Add item to inventory
+        public void AddItem(Item i) {
+            var space = 0;
+            // Calculate Space in inventory
+            foreach (var x in this.Inventory) {
+                space = space + x.Size;
+            }
+
+            // Add item to inventory if enough space
+            if (i.Size <= space) {
+                this.Inventory.Add(i);
+            } else {
+                Console.WriteLine("You do not have enough space to add item!");
+            }
+        }
+
         // End Inventory Functions
 
         public static Player CreatePlayer() {
-            InlineConsole.PlayerCreator();
+            GameController.PlayerCreator();
             //Prompt User Name
             Console.WriteLine("Enter Player Name");
             var nm = InlineConsole.ReadPrompt("> ");
@@ -90,11 +106,17 @@ namespace ConsoleGame.Models.Player {
                     var fighter = new Fighter();
                     fighter.Name = nm;
                     return fighter;
+                case "w":
+                    var wizard = new Wizard();
+                    wizard.Name = nm;
+                    return wizard;
+                case "s":
+                    var speaker = new Speaker();
+                    speaker.Name = nm;
+                    return speaker;
                 default:
                     return null;
             }
-
-
         }
     }
 }
