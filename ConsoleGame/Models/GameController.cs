@@ -11,6 +11,8 @@ namespace ConsoleGame.Models {
          * Pictures?: https://manytools.org/hacker-tools/convert-images-to-ascii-art/
          */
         public static void DisplayHome() {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.White;
             // Literal String to display Home Title
             Console.WriteLine(@" .-') _        _   .-')      ('-.         ('-. .-.  ('-.                    .-') _ .-') _             .-') _            
 (  OO) )      ( '.( OO )_  _(  OO)       ( OO )  / ( OO ).-.               ( OO ) (  OO) )           ( OO ) )           
@@ -129,6 +131,9 @@ namespace ConsoleGame.Models {
                     break;
                 case "f":
                     // Fight Code
+                    if (InlineConsole.GetType(p) == "Fighter") {
+
+                    }
                     Console.WriteLine("Fought");
                     break;
                 case "r":

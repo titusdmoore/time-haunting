@@ -17,5 +17,14 @@ namespace ConsoleGame.Models {
             var arr = s.ToCharArray();
             return arr[0].ToString().ToLower();
         }
+
+        // Get type of object
+        public static string GetType(Object o) {
+            var t = o.GetType().ToString();
+            var cS = t.Split('.');
+
+            return cS[cS.Length - 1];
+            
+        }
     }
 }

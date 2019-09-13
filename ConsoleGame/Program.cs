@@ -1,4 +1,5 @@
 ﻿using ConsoleGame.Models;
+using ConsoleGame.Models.Mobs;
 using ConsoleGame.Models.PlayerNS;
 using System;
 
@@ -59,7 +60,19 @@ namespace ConsoleGame {
 
 
             while (run) {
-                Console.WriteLine($"Welcome {instancePlayer.Name}");
+                GameController.DisplayHome();
+
+                var mob = new Mob();
+                mob.Name = "Alex";
+                mob.SetLine($"Hello {instancePlayer.Name}, prepare to die");
+                Console.WriteLine($"Welcome {instancePlayer.Name}. ");
+                Console.ReadLine();
+
+                GameController.DisplayHome();
+                Console.WriteLine($"You have run into a {InlineConsole.GetType(mob)} named {mob.Name}. He says: ");
+                mob.Speak();
+
+
 
                 GameController.Controls(instancePlayer);
 
