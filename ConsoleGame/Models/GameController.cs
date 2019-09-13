@@ -1,4 +1,5 @@
-﻿using ConsoleGame.Models.PlayerNS;
+﻿using ConsoleGame.Models.Mobs;
+using ConsoleGame.Models.PlayerNS;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -115,7 +116,7 @@ namespace ConsoleGame.Models {
         }
 
 
-        public static void Controls(Player p) {
+        public static void Controls(Player p, Mob m) {
             Console.WriteLine("Select what you will do!");
             Console.WriteLine(@"[M]ove   [I]nvestigate   [F]ight   [R]un   [C]ast   [V]iew Inventory   I[N]teract   [P]layer Info");
             var action = InlineConsole.ReadPrompt("> ");
@@ -131,9 +132,7 @@ namespace ConsoleGame.Models {
                     break;
                 case "f":
                     // Fight Code
-                    if (InlineConsole.GetType(p) == "Fighter") {
-
-                    }
+                    var weapon = p.Fight();
                     Console.WriteLine("Fought");
                     break;
                 case "r":

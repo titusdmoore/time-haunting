@@ -1,4 +1,5 @@
 ﻿using ConsoleGame.Models;
+using ConsoleGame.Models.Items;
 using ConsoleGame.Models.Mobs;
 using ConsoleGame.Models.PlayerNS;
 using System;
@@ -31,6 +32,7 @@ namespace ConsoleGame {
                 // End Home Screen Code
 
                 // Test User Input
+
                 switch (InlineConsole.switchFormat(t)) {
                     case "s":
                         instancePlayer = Player.CreatePlayer();
@@ -46,13 +48,13 @@ namespace ConsoleGame {
                         Console.WriteLine("This would be a list if I wasn't lazy");
                         break;
                     case "e":
-                        exit = true;
+                        Environment.Exit(1);
                         break;
                     case "v":
                         Console.WriteLine("Made by Titus Moore");
                         break;
                     default:
-                        exit = true;
+                        exit = false;
                         break;
                 }
 
@@ -63,18 +65,25 @@ namespace ConsoleGame {
                 GameController.DisplayHome();
 
                 var mob = new Mob();
-                mob.Name = "Alex";
+                mob.Name = "Alexei Chong";
                 mob.SetLine($"Hello {instancePlayer.Name}, prepare to die");
                 Console.WriteLine($"Welcome {instancePlayer.Name}. ");
                 Console.ReadLine();
 
+                var sword = new Weapon();
+                sword.Name = "Sword";
+                sword.Damage = 45;
+                sword.Size = 23;
+                instancePlayer.AddItem(sword);
+
+
                 GameController.DisplayHome();
-                Console.WriteLine($"You have run into a {InlineConsole.GetType(mob)} named {mob.Name}. He says: ");
+                Console.WriteLine($"You have run into a {InlineConsole.GetType(mob)} named {mob.Name}, he is flying on a matress with only socks. It is amazing that he is flying with how BEEFY he is, looks weak though... He says: ");
                 mob.Speak();
 
 
 
-                GameController.Controls(instancePlayer);
+                GameController.Controls(instancePlayer, mob);
 
                 run = false;
             }

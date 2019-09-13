@@ -1,6 +1,7 @@
 ﻿using ConsoleGame.Models.Items;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ConsoleGame.Models.PlayerNS {
@@ -11,7 +12,7 @@ namespace ConsoleGame.Models.PlayerNS {
         private decimal Armor { get; set; } = 0;
         public decimal Cash { get; set; }
         public bool isDead { get; set; } = false;
-        private List<Item> Inventory { get; set; }
+        public List<Item> Inventory { get; set; } = new List<Item>();
         private int InvSpace { get; set; } = 100;
 
         /* 
@@ -91,7 +92,7 @@ namespace ConsoleGame.Models.PlayerNS {
         public string ViewInventory() {
             var s = "";
             foreach (var a in this.Inventory) {
-                s = s + " " + a.Name;
+                s += a.Name;
             }
             return s;
         }
@@ -108,19 +109,24 @@ namespace ConsoleGame.Models.PlayerNS {
             Console.WriteLine($"Enter Type");
             Console.WriteLine(@"[F]ighter       [W]izard       [S]peaker");
             var t = InlineConsole.ReadPrompt("> ");
-
+            var fist = new Weapon();
+            fist.Name = "Fist";
+            fist.Damage = 10;
             switch (InlineConsole.switchFormat(t)) {
                 case "f":
                     var fighter = new Fighter();
                     fighter.Name = nm;
+                    fighter.Inventory.Add(fist);
                     return fighter;
                 case "w":
                     var wizard = new Wizard();
                     wizard.Name = nm;
+                    wizard.Inventory.Add(fist);
                     return wizard;
                 case "s":
                     var speaker = new Speaker();
                     speaker.Name = nm;
+                    speaker.Inventory.Add(fist);
                     return speaker;
                 default:
                     return null;
@@ -132,6 +138,22 @@ namespace ConsoleGame.Models.PlayerNS {
             var type = typeFull.Split('.');
 
              Console.WriteLine($"Name: {this.Name}; Class: {type[type.Length - 1]}; Level: {this.Level}; Health: {this.Health}; Armor: {this.Armor}; Cash: {this.Cash};");
+        }
+
+        public Item Fight() {
+            GameController.DisplayHome();
+            Console.WriteLine("Chose Your Weapon!");
+
+            Console.WriteLine(this.ViewInventory());
+
+            
+            Item iR = null;
+            while (iR != null) {
+                var s = InlineConsole.ReadPrompt("> ");
+                iR = this.Inventory.SingleOrDefault(i => i.Name == s);
+            }
+
+            return iR;
         }
     }
 }
