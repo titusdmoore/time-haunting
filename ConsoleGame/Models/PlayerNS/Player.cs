@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleGame.Models.Player {
+namespace ConsoleGame.Models.PlayerNS {
     public class Player {
         public string Name { get; set; }
         private int Level { get; set; } = 1;
@@ -21,14 +21,14 @@ namespace ConsoleGame.Models.Player {
         // Add Method to Add Health
         public void Heal(int a) {
             if (a > 0 && this.Health < 130) {
-                this.Health = this.Health + a;
+                this.Health += a;
             }
         }
 
         // Add Method to Remove Health
         public void Hurt(int a) {
             if (this.Health > 0 && a < this.Health) {
-                this.Health = this.Health - a;
+                this.Health -= a;
             }else if(a >= this.Health) {
                 Kill();
             }
@@ -50,14 +50,14 @@ namespace ConsoleGame.Models.Player {
         // Add Method to Add Armor
         public void AddArmor(int a) {
             if (a > 0) {
-                this.Armor = this.Armor + a;
+                this.Armor += a;
             }
         }
 
         // Add Method to Damage Armor
         public void DamgArmor(int a) {
             if (this.Armor > 0 && a <= this.Armor ) {
-                this.Armor = this.Armor - a;
+                this.Armor -= a;
             } else {
                 this.Armor = 0;
             }
@@ -69,7 +69,7 @@ namespace ConsoleGame.Models.Player {
         
         // Add Inventory Space
         public void AddInv(int a) {
-            this.InvSpace = this.InvSpace + a;
+            this.InvSpace += a;
         }
 
         // Add item to inventory
@@ -77,7 +77,7 @@ namespace ConsoleGame.Models.Player {
             var space = 0;
             // Calculate Space in inventory
             foreach (var x in this.Inventory) {
-                space = space + x.Size;
+                space += x.Size;
             }
 
             // Add item to inventory if enough space
@@ -86,6 +86,14 @@ namespace ConsoleGame.Models.Player {
             } else {
                 Console.WriteLine("You do not have enough space to add item!");
             }
+        }
+
+        public string ViewInventory() {
+            var s = "";
+            foreach (var a in this.Inventory) {
+                s = s + " " + a.Name;
+            }
+            return s;
         }
 
         // End Inventory Functions
@@ -117,6 +125,13 @@ namespace ConsoleGame.Models.Player {
                 default:
                     return null;
             }
+
+        }
+        public void ViewStats() {
+            var typeFull = this.GetType().ToString();
+            var type = typeFull.Split('.');
+
+             Console.WriteLine($"Name: {this.Name}; Class: {type[type.Length - 1]}; Level: {this.Level}; Health: {this.Health}; Armor: {this.Armor}; Cash: {this.Cash};");
         }
     }
 }

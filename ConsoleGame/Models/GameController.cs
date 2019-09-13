@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleGame.Models.PlayerNS;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -112,9 +113,9 @@ namespace ConsoleGame.Models {
         }
 
 
-        public static void Controls() {
+        public static void Controls(Player p) {
             Console.WriteLine("Select what you will do!");
-            Console.WriteLine(@"[M]ove   [I]nvestigate   [F]ight   [R]un   [C]ast   [V]iew Inventory   I[N]teract");
+            Console.WriteLine(@"[M]ove   [I]nvestigate   [F]ight   [R]un   [C]ast   [V]iew Inventory   I[N]teract   [P]layer Info");
             var action = InlineConsole.ReadPrompt("> ");
 
             switch (InlineConsole.switchFormat(action)) {
@@ -141,11 +142,15 @@ namespace ConsoleGame.Models {
                 case "v":
                     // View Inventory Code
                     Console.WriteLine("View");
+                    p.ViewInventory();
                     InventoryControls();
                     break;
                 case "n":
                     // Interact Code
                     Console.WriteLine("Interacted");
+                    break;
+                case "p":
+                    p.ViewStats();
                     break;
                 default:
                     break;
@@ -154,7 +159,7 @@ namespace ConsoleGame.Models {
         }
 
         public static void InventoryControls() {
-            //TODO add controls drop, sell, 
+            //TODO add controls drop, sell, use
         }
     }
 }

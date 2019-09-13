@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleGame.Models.Player {
+namespace ConsoleGame.Models.PlayerNS {
     public class Fighter : Player {
         // Adds Weapon for fighter Class
         public Item Weapon { get; set; }

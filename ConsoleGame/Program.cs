@@ -1,5 +1,5 @@
 ﻿using ConsoleGame.Models;
-using ConsoleGame.Models.Player;
+using ConsoleGame.Models.PlayerNS;
 using System;
 
 namespace ConsoleGame {
@@ -61,7 +61,7 @@ namespace ConsoleGame {
             while (run) {
                 Console.WriteLine($"Welcome {instancePlayer.Name}");
 
-                GameController.Controls();
+                GameController.Controls(instancePlayer);
 
                 run = false;
             }

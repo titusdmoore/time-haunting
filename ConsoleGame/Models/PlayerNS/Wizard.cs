@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleGame.Models.Player {
+namespace ConsoleGame.Models.PlayerNS {
     public class Wizard : Player {
         public Item Spell { get; set; }
         public int Power { get; set; }
